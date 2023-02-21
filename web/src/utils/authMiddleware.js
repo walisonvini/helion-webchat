@@ -4,26 +4,23 @@ import { userStore } from '../stores/UserStore';
 
 export const requireAuthenticated = (to, from, next) => {
   const store = userStore();
-
-  if (!store.isAuthenticated) {
-    next({
-      name: "login"
-    });
-  } else {
-    const sla = auth.retrieveUser()
-    store.setUser(sla)
-    next();
-  }
+  auth.retrieveUser().then(response => {
+    const user = response.data.user
+    store.setUser(user)
+    next()
+  }).catch(error => {
+    console.error(error)
+    next({ name: 'login' })
+  })
 };
 
 export const requireUnauthenticated = (to, from, next) => {
-  const store = userStore();
-  
-  if (store.isAuthenticated) {
-    next({
-      name: "home"
-    });
-  } else {
-    next();
-  }
+  const store = userStore();  
+  auth.retrieveUser().then(response => {
+    const user = response.data.user
+    store.setUser(user)
+    next({ name: 'chat' })
+  }).catch(error => {
+    next()
+  })
 };

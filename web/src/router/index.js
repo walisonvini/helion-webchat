@@ -4,6 +4,7 @@ import { requireUnauthenticated, requireAuthenticated } from '../utils/authMiddl
 import HomePage from '../views/HomePage.vue';
 import LogIn from '../views/LogIn.vue';
 import Register from '../views/Register.vue';
+import WebChat from '../views/WebChat.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -12,12 +13,13 @@ const router = createRouter({
       path: '/',
       name: 'home',
       component: HomePage,
-      beforeEnter: requireAuthenticated
+      beforeEnter: requireUnauthenticated
     },
     {
       path: '/login',
       name: 'login',
       component: LogIn,
+      beforeEnter: requireUnauthenticated
     },
     {
       path: '/register',
@@ -25,6 +27,12 @@ const router = createRouter({
       component: Register,
       beforeEnter: requireUnauthenticated
     },
+    {
+      path: '/client/chat',
+      name: 'chat',
+      component: WebChat,
+      beforeEnter: requireAuthenticated
+    }
   ],
 });
 

@@ -12,7 +12,7 @@ export default {
 
       if (isPasswordValid) {
         const token = jwt.sign({ userId: user.id }, process.env.JWT_SECRET, {
-          expiresIn: 300,
+          expiresIn: 18000,
         });
         return Promise.resolve({
           status: 200, message: 'Login realizado com sucesso!', user, token,

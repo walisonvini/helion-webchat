@@ -17,6 +17,7 @@
 </template>
 
 <script  setup>
+import router from '@/router'
 import VueCookies from 'vue-cookies'
 import { reactive } from 'vue';
 
@@ -35,6 +36,9 @@ async function submitForm(form) {
     const response = await http.post('/login', form);
     store.setUser(response.data.user);
     VueCookies.set('token', response.data.token);
+    router.push({
+        name: "chat"
+    });
   } catch (error) {
     console.log(error.response.data.message);
   }
