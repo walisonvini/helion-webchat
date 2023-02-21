@@ -1,4 +1,6 @@
 import bcrypt from 'bcrypt';
+import jwt from 'jsonwebtoken';
+
 import DB from '../database/index';
 
 export default {
@@ -9,7 +11,12 @@ export default {
       const isPasswordValid = await bcrypt.compare(password, user.password);
 
       if (isPasswordValid) {
-        return Promise.resolve({ status: 200, message: 'Login realizado com sucesso!', user });
+        const token = jwt.sign({ userId: user.id }, process.env.JWT_SECRET, {
+          expiresIn: 300,
+        });
+        return Promise.resolve({
+          status: 200, message: 'Login realizado com sucesso!', user, token,
+        });
       }
       return Promise.reject({ status: 404, message: 'Nome de usuario ou senha incorretos' });
     } catch (error) {

@@ -21,7 +21,7 @@ Install the dependencies express `cd server` or `helion-webchat\server`
 npm install
 ```
 
-configure your database
+Configure your database
 
 ```bash
 **This project is initially configured for PostgreSQL database, but you can use any database of your preference as long as Knex supports it. Change the database settings in the 'knex.js' file inside the 'server' folder.**
@@ -34,8 +34,6 @@ configure your database
 Then run the development server:
 
 ```bash
-yarn dev
-# or
 npm run dev
 ```
 

@@ -7,6 +7,8 @@ import bodyParser from 'body-parser';
 import config from './config';
 import routes from './routes';
 
+require('dotenv').config();
+
 const app = express();
 
 app.use(bodyParser.urlencoded({ extended: true }));

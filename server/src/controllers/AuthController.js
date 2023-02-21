@@ -8,6 +8,7 @@ export default {
       res.status(reponse.status).send({
         message: reponse.message,
         status_code: reponse.status,
+        token: reponse.token,
         user: reponse.user,
       });
     }).catch((error) => {

@@ -37,12 +37,12 @@ export default {
   data() {
     return {
         form: {
-            username: '',
-            password: '',
-            email: '',
-            first_name: '',
-            last_name: '',
-            profile_picture: '',
+            username: null,
+            password: null,
+            email: null,
+            first_name: null,
+            last_name: null,
+            profile_picture: null,
         }
     }
   },
@@ -51,9 +51,16 @@ export default {
         let resApi;
         console.log(form);
         await axios.post('http://localhost:8080/register', form)
-                .then(reponse => resApi);
+                .then(response => {
+                    resApi = response
+                    console.log(resApi.data.message);
+                })
+                .catch(err => {
+                    resApi = err
+                    console.log(resApi.response.data.message);
+                });
 
-        console.log(resApi);
+        
     },
   }
 }

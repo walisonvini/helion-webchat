@@ -1,4 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router';
+import { requireUnauthenticated, requireAuthenticated } from '../utils/authMiddleware';
+
 import HomePage from '../views/HomePage.vue';
 import LogIn from '../views/LogIn.vue';
 import Register from '../views/Register.vue';
@@ -10,6 +12,7 @@ const router = createRouter({
       path: '/',
       name: 'home',
       component: HomePage,
+      beforeEnter: requireAuthenticated
     },
     {
       path: '/login',
@@ -20,6 +23,7 @@ const router = createRouter({
       path: '/register',
       name: 'register',
       component: Register,
+      beforeEnter: requireUnauthenticated
     },
   ],
 });
