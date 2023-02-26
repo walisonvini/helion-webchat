@@ -16,7 +16,7 @@
   </form>
 </template>
 
-<script  setup>
+<script setup>
 import router from '@/router'
 import VueCookies from 'vue-cookies'
 import { reactive } from 'vue';

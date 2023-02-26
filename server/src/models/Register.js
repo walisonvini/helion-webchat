@@ -20,11 +20,10 @@ export default {
 
       return Promise.resolve({ status: 201, message: 'registrado com sucesso' });
     } catch (error) {
-      console.log();
       if (error.constraint === 'users_username_unique') {
-        return Promise.reject({ status: 409, message: 'Nome de usuario já existe' });
+        return Promise.reject({ status: 409, message: 'Nome de usuário já existente' });
       } if (error.constraint === 'users_email_unique') {
-        return Promise.reject({ status: 409, message: 'Email já existe' });
+        return Promise.reject({ status: 409, message: 'Email já existente' });
       }
       return Promise.reject({ status: 500, message: 'Erro ao criar uma conta, tente novamente mais tarde.' });
     }
