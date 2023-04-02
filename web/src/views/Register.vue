@@ -120,9 +120,6 @@ export default {
       form.email.invalidFeedback = false;
       form.full_name.invalidFeedback = false;
 
-      success.value = false;
-      error.value = false;
-
       const data = {
         username: form.username.value,
         password: form.password.value,
@@ -133,6 +130,7 @@ export default {
       try {
         await auth.register(data);
         
+        error.value = false;
         success.value = true;
 
         setTimeout(() => {
@@ -156,7 +154,7 @@ export default {
             form.full_name.invalidFeedback = errors.full_name;
           }
         }
-        if(response.status === 409) {
+        if (response.status === 409) {
           const { message } = response.data
 
           error.value = message;
@@ -166,6 +164,11 @@ export default {
           } else {
             form.email.invalidFeedback = true;
           }
+        }
+        if (response.status === 500) {
+          const { message } = response.data
+
+          error.value = message;
         }
         
       }

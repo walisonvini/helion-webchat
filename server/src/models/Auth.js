@@ -4,9 +4,11 @@ import jwt from 'jsonwebtoken';
 import DB from '../database/index';
 
 export default {
-  async login(username, password) {
+  async login(user) {
+    const { username, password } = user;
+
     try {
-      const user = await DB('users').where('username', username).first();
+      const user = await DB('users').where('username', username).orWhere('email', username).first();
 
       const isPasswordValid = await bcrypt.compare(password, user.password);
 
