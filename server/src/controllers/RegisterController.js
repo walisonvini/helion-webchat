@@ -1,24 +1,11 @@
 import Register from '../models/Register';
-
-function checkForMissingFields(user) {
-  const requiredFields = ['username', 'password', 'email', 'full_name'];
-  const missingFields = {};
-
-  // eslint-disable-next-line no-restricted-syntax
-  for (const field of requiredFields) {
-    if (!user[field]) {
-      missingFields[field] = true;
-    }
-  }
-
-  return missingFields;
-}
+import checkForMissingFields from '../utils/checkForMissingFields';
 
 export default {
   register(req, res) {
     const newUser = req.body;
 
-    const missingFields = checkForMissingFields(newUser);
+    const missingFields = checkForMissingFields(newUser, ['username', 'password', 'email', 'full_name']);
 
     if (Object.keys(missingFields).length !== 0) {
       res.status(400).send({ errors: missingFields });

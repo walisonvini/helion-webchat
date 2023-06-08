@@ -1,27 +1,13 @@
 import Auth from '../models/Auth';
-
-function checkForMissingFields(user) {
-  const requiredFields = ['username', 'password'];
-  const missingFields = {};
-
-  // eslint-disable-next-line no-restricted-syntax
-  for (const field of requiredFields) {
-    if (!user[field]) {
-      missingFields[field] = true;
-    }
-  }
-
-  return missingFields;
-}
+import checkForMissingFields from '../utils/checkForMissingFields';
 
 export default {
   login(req, res) {
     const user = req.body;
 
-    const missingFields = checkForMissingFields(user);
+    const missingFields = checkForMissingFields(user, ['username', 'password']);
 
     if (Object.keys(missingFields).length !== 0) {
-      console.log(missingFields);
       res.status(400).send({ errors: missingFields });
       return;
     }
