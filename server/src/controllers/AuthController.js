@@ -8,8 +8,7 @@ export default {
     const missingFields = checkForMissingFields(user, ['username', 'password']);
 
     if (Object.keys(missingFields).length !== 0) {
-      res.status(400).send({ errors: missingFields });
-      return;
+      return res.status(400).send({ errors: missingFields });
     }
 
     Auth.login(user).then((reponse) => {

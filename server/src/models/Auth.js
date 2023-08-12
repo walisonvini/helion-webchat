@@ -2,6 +2,7 @@ import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 
 import DB from '../database/index';
+import config from '../config';
 
 export default {
   async login(user) {
@@ -13,7 +14,7 @@ export default {
       const isPasswordValid = await bcrypt.compare(password, user.password);
 
       if (isPasswordValid) {
-        const token = jwt.sign({ userId: user.id }, process.env.JWT_SECRET, {
+        const token = jwt.sign({ userId: user.id }, config.app.jwt_secret, {
           expiresIn: 18000,
         });
         return Promise.resolve({
