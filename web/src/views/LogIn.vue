@@ -67,12 +67,12 @@ import { reactive, ref } from 'vue';
 import { useRouter } from "vue-router";
 import VueCookies from 'vue-cookies'
 
-import { userStore } from '../stores/UserStore';
+import { useUserStore } from '../stores/UserStore';
 import auth from '../api/auth';
 
 export default {
   setup() {
-    const store = userStore()
+    const store = useUserStore()
     const router = useRouter();
 
     const form = reactive({

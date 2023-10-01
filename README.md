@@ -25,12 +25,15 @@ Configure your database
 
 **This project is initially configured for PostgreSQL database, but you can use any 
 database of your preference as long as Knex supports it. Change the database settings 
-in the 'knex.js' file inside the 'server' folder.**
+in the 'knex.js' file inside the 'server\database' folder.**
 
-```bash
 1 - create an .env file with your database configuration, use .env.example as a base.
-
-2 - migrate the tables to your database using the command: npx knex migrate:latest
+```bash
+cp .env.example .env
+```
+2 - migrate the tables to your database using the command:
+```bash
+npx knex migrate:latest
 ```
 
 Then run the development server:

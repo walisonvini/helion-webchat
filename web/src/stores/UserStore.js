@@ -1,7 +1,8 @@
 import { reactive, computed } from 'vue';
 import { defineStore } from 'pinia';
 
-export const userStore = defineStore('user', () => {
+export const useUserStore = defineStore('user', () => {
+  
   const userState = reactive({
     user: null
   });
@@ -17,4 +18,4 @@ export const userStore = defineStore('user', () => {
     setUser,
     isAuthenticated,
   }
-})
+});
