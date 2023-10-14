@@ -1,4 +1,4 @@
-exports.up = async (knex) => knex.schema.createTable('privateMessages', (table) => {
+exports.up = async (knex) => knex.schema.createTable('private_messages', (table) => {
   table.increments('id');
 
   table.text('subject').notNullable();
@@ -11,4 +11,4 @@ exports.up = async (knex) => knex.schema.createTable('privateMessages', (table) 
   table.foreign('sent_to_id').references('id').inTable('users').onDelete('CASCADE');
 });
 
-exports.down = async (knex) => knex.schema.dropTable('privateMessages');
+exports.down = async (knex) => knex.schema.dropTable('private_messages');

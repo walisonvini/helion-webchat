@@ -1,4 +1,4 @@
-exports.up = async (knex) => knex.schema.createTable('publicMessages', (table) => {
+exports.up = async (knex) => knex.schema.createTable('group_messages', (table) => {
   table.increments('id');
 
   table.text('subject').notNullable();
@@ -11,4 +11,4 @@ exports.up = async (knex) => knex.schema.createTable('publicMessages', (table) =
   table.foreign('group_id').references('id').inTable('groups').onDelete('CASCADE');
 });
 
-exports.down = async (knex) => knex.schema.dropTable('publicMessages');
+exports.down = async (knex) => knex.schema.dropTable('group_messages');
