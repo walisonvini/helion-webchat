@@ -4,10 +4,13 @@ export default {
   async getMessages(userId, friendId) {
     try {
       const messages = await DB('private_messages')
-      .select('*').where({ sent_from_id: userId })
-      .where({ sent_to_id: friendId })
-      .orWhere({ sent_from_id: friendId })
-      .where({ sent_to_id: userId });
+      .select('*')
+      .where(function () {
+        this.where('sent_from_id', userId).andWhere('sent_to_id', friendId)
+      })
+      .orWhere(function () {
+        this.where('sent_from_id', friendId).andWhere('sent_to_id', userId)
+      });
       
       return Promise.resolve(messages);
     } catch (error) {

@@ -17,7 +17,16 @@ const newMessage = reactive({
   subject: ''
 });
 
+const hasOnlyWhitespace = (input) => {
+  const regex = /^\s*$/;
+  return regex.test(input);
+}
+
 const sendMessage = () => {
+  if(hasOnlyWhitespace(newMessage.subject)) {
+    return
+  }
+
   socket.emit("chat message", newMessage);
   
   newMessage.sent_to_id = chatStore.friend.id;
@@ -115,7 +124,7 @@ onMounted(() => {
 
               <input type="text" placeholder="Message"
                 class="block w-full py-2 pl-4 mx-3 bg-gray-100 rounded-full outline-none focus:text-gray-700"
-                name="message" required v-model="newMessage.subject" />
+                name="message" required v-model="newMessage.subject" @keyup.enter="sendMessage" />
               <button>
                 <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 text-gray-500" fill="none" viewBox="0 0 24 24"
                   stroke="currentColor">
